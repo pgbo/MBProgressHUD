@@ -1,5 +1,5 @@
 //
-//  MBProgressHUD.h
+//  GBMBProgressHUD.h
 //  Version 1.0.0
 //  Created by Matej Bukovinski on 2.4.09.
 //
@@ -31,45 +31,45 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @class MBBackgroundView;
-@protocol MBProgressHUDDelegate;
+@protocol GBMBProgressHUDDelegate;
 
 
 extern CGFloat const MBProgressMaxOffset;
 
-typedef NS_ENUM(NSInteger, MBProgressHUDMode) {
+typedef NS_ENUM(NSInteger, GBMBProgressHUDMode) {
     /// UIActivityIndicatorView.
-    MBProgressHUDModeIndeterminate,
+    GBMBProgressHUDModeIndeterminate,
     /// A round, pie-chart like, progress view.
-    MBProgressHUDModeDeterminate,
+    GBMBProgressHUDModeDeterminate,
     /// Horizontal progress bar.
-    MBProgressHUDModeDeterminateHorizontalBar,
+    GBMBProgressHUDModeDeterminateHorizontalBar,
     /// Ring-shaped progress view.
-    MBProgressHUDModeAnnularDeterminate,
+    GBMBProgressHUDModeAnnularDeterminate,
     /// Shows a custom view.
-    MBProgressHUDModeCustomView,
+    GBMBProgressHUDModeCustomView,
     /// Shows only labels.
-    MBProgressHUDModeText
+    GBMBProgressHUDModeText
 };
 
-typedef NS_ENUM(NSInteger, MBProgressHUDAnimation) {
+typedef NS_ENUM(NSInteger, GBMBProgressHUDAnimation) {
     /// Opacity animation
-    MBProgressHUDAnimationFade,
+    GBMBProgressHUDAnimationFade,
     /// Opacity + scale animation (zoom in when appearing zoom out when disappearing)
-    MBProgressHUDAnimationZoom,
+    GBMBProgressHUDAnimationZoom,
     /// Opacity + scale animation (zoom out style)
-    MBProgressHUDAnimationZoomOut,
+    GBMBProgressHUDAnimationZoomOut,
     /// Opacity + scale animation (zoom in style)
-    MBProgressHUDAnimationZoomIn
+    GBMBProgressHUDAnimationZoomIn
 };
 
-typedef NS_ENUM(NSInteger, MBProgressHUDBackgroundStyle) {
+typedef NS_ENUM(NSInteger, GBMBProgressHUDBackgroundStyle) {
     /// Solid color background
-    MBProgressHUDBackgroundStyleSolidColor,
+    GBMBProgressHUDBackgroundStyleSolidColor,
     /// UIVisualEffectView or UIToolbar.layer background view
-    MBProgressHUDBackgroundStyleBlur
+    GBMBProgressHUDBackgroundStyleBlur
 };
 
-typedef void (^MBProgressHUDCompletionBlock)();
+typedef void (^GBMBProgressHUDCompletionBlock)();
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -79,13 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Displays a simple HUD window containing a progress indicator and two optional labels for short messages.
  *
  * This is a simple drop-in class for displaying a progress HUD view similar to Apple's private UIProgressHUD class.
- * The MBProgressHUD window spans over the entire space given to it by the initWithFrame: constructor and catches all
+ * The GBMBProgressHUD window spans over the entire space given to it by the initWithFrame: constructor and catches all
  * user input on this region, thereby preventing the user operations on components below the view.
  *
  * @note To still allow touches to pass through the HUD, you can set hud.userInteractionEnabled = NO.
- * @attention MBProgressHUD is a UI class and should therefore only be accessed on the main thread.
+ * @attention GBMBProgressHUD is a UI class and should therefore only be accessed on the main thread.
  */
-@interface MBProgressHUD : UIView
+@interface GBMBProgressHUD : UIView
 
 /**
  * Creates a new HUD, adds it to provided view and shows it. The counterpart to this method is hideHUDForView:animated:.
@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param view The view that is going to be searched.
  * @return A reference to the last HUD subview discovered.
  */
-+ (nullable MBProgressHUD *)HUDForView:(UIView *)view;
++ (nullable GBMBProgressHUD *)HUDForView:(UIView *)view;
 
 /**
  * A convenience constructor that initializes the HUD with the view's bounds. Calls the designated constructor with
@@ -176,12 +176,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The HUD delegate object. Receives HUD state notifications.
  */
-@property (weak, nonatomic) id<MBProgressHUDDelegate> delegate;
+@property (weak, nonatomic) id<GBMBProgressHUDDelegate> delegate;
 
 /**
  * Called after the HUD is hiden.
  */
-@property (copy, nullable) MBProgressHUDCompletionBlock completionBlock;
+@property (copy, nullable) GBMBProgressHUDCompletionBlock completionBlock;
 
 /*
  * Grace period is the time (in seconds) that the invoked method may be run without
@@ -208,9 +208,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Appearance
 
 /** 
- * MBProgressHUD operation mode. The default is MBProgressHUDModeIndeterminate.
+ * GBMBProgressHUD operation mode. The default is GBMBProgressHUDModeIndeterminate.
  */
-@property (assign, nonatomic) MBProgressHUDMode mode;
+@property (assign, nonatomic) GBMBProgressHUDMode mode;
 
 /**
  * A color that gets forwarded to all labels and supported indicators. Also sets the tintColor
@@ -222,7 +222,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The animation type that should be used when the HUD is shown and hidden.
  */
-@property (assign, nonatomic) MBProgressHUDAnimation animationType UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) GBMBProgressHUDAnimation animationType UI_APPEARANCE_SELECTOR;
 
 /**
  * The bezel offset relative to the center of the view. You can use MBProgressMaxOffset
@@ -281,7 +281,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) MBBackgroundView *backgroundView;
 
 /**
- * The UIView (e.g., a UIImageView) to be shown when the HUD is in MBProgressHUDModeCustomView.
+ * The UIView (e.g., a UIImageView) to be shown when the HUD is in GBMBProgressHUDModeCustomView.
  * The view should implement intrinsicContentSize for proper sizing. For best results use approximately 37 by 37 pixels.
  */
 @property (strong, nonatomic, nullable) UIView *customView;
@@ -305,14 +305,14 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@protocol MBProgressHUDDelegate <NSObject>
+@protocol GBMBProgressHUDDelegate <NSObject>
 
 @optional
 
 /** 
  * Called after the HUD was fully hidden from the screen. 
  */
-- (void)hudWasHidden:(MBProgressHUD *)hud;
+- (void)hudWasHidden:(GBMBProgressHUD *)hud;
 
 @end
 
@@ -383,10 +383,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The background style. 
- * Defaults to MBProgressHUDBackgroundStyleBlur on iOS 7 or later and MBProgressHUDBackgroundStyleSolidColor otherwise.
+ * Defaults to GBMBProgressHUDBackgroundStyleBlur on iOS 7 or later and GBMBProgressHUDBackgroundStyleSolidColor otherwise.
  * @note Due to iOS 7 not supporting UIVisualEffectView, the blur effect differs slightly between iOS 7 and later versions.
  */
-@property (nonatomic) MBProgressHUDBackgroundStyle style;
+@property (nonatomic) GBMBProgressHUDBackgroundStyle style;
 
 /**
  * The background color or the blur tint color.
@@ -396,7 +396,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MBProgressHUD (Deprecated)
+@interface GBMBProgressHUD (Deprecated)
 
 + (NSArray *)allHUDsForView:(UIView *)view __attribute__((deprecated("Store references when using more than one HUD per view.")));
 + (NSUInteger)hideAllHUDsForView:(UIView *)view animated:(BOOL)animated __attribute__((deprecated("Store references when using more than one HUD per view.")));
@@ -409,10 +409,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated __attribute__((deprecated("Use GCD directly.")));
 - (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block __attribute__((deprecated("Use GCD directly.")));
-- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(nullable MBProgressHUDCompletionBlock)completion __attribute__((deprecated("Use GCD directly.")));
+- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(nullable GBMBProgressHUDCompletionBlock)completion __attribute__((deprecated("Use GCD directly.")));
 - (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block onQueue:(dispatch_queue_t)queue __attribute__((deprecated("Use GCD directly.")));
 - (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block onQueue:(dispatch_queue_t)queue
-     completionBlock:(nullable MBProgressHUDCompletionBlock)completion __attribute__((deprecated("Use GCD directly.")));
+     completionBlock:(nullable GBMBProgressHUDCompletionBlock)completion __attribute__((deprecated("Use GCD directly.")));
 @property (assign) BOOL taskInProgress __attribute__((deprecated("No longer needed.")));
 
 @property (nonatomic, copy) NSString *labelText __attribute__((deprecated("Use label.text instead.")));
@@ -427,7 +427,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat yOffset __attribute__((deprecated("Set offset.y instead.")));
 @property (assign, nonatomic) CGFloat cornerRadius __attribute__((deprecated("Set bezelView.layer.cornerRadius instead.")));
 @property (assign, nonatomic) BOOL dimBackground __attribute__((deprecated("Customize HUD background properties instead.")));
-@property (strong, nonatomic) UIColor *activityIndicatorColor __attribute__((deprecated("Use UIAppearance to customize UIActivityIndicatorView. E.g.: [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = [UIColor redColor];")));
+@property (strong, nonatomic) UIColor *activityIndicatorColor __attribute__((deprecated("Use UIAppearance to customize UIActivityIndicatorView. E.g.: [UIActivityIndicatorView appearanceWhenContainedIn:[GBMBProgressHUD class], nil].color = [UIColor redColor];")));
 @property (atomic, assign, readonly) CGSize size __attribute__((deprecated("Get the bezelView.frame.size instead.")));
 
 @end
